@@ -11,17 +11,17 @@ import java.util.ArrayList;
  */
 public class Farmaco {
     
-    private String nombreFarmaco;
+    private String nombre;
     private double valorFarmaco;
-    private String idFarmaco;
-    private ArrayList<String> presentaciones;
+    private int idFarmaco;
+    private ArrayList<Presentacion> presentaciones;
     private ArrayList<String> dosificaciones;
 
     public Farmaco() {
     }
 
-    public Farmaco(String nombreFarmaco, double valorFarmaco, String idFarmaco, ArrayList<String> presentaciones, ArrayList<String> dosificaciones) {
-        this.nombreFarmaco = nombreFarmaco;
+    public Farmaco(String nombreFarmaco, double valorFarmaco, int idFarmaco, ArrayList<Presentacion> presentaciones, ArrayList<String> dosificaciones) {
+        this.nombre = nombreFarmaco;
         this.valorFarmaco = valorFarmaco;
         this.idFarmaco = idFarmaco;
         this.presentaciones = presentaciones;
@@ -36,12 +36,12 @@ public class Farmaco {
         this.dosificaciones = dosificaciones;
     }
 
-    public String getNombreFarmaco() {
-        return nombreFarmaco;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setNombreFarmaco(String nombreFarmaco) {
-        this.nombreFarmaco = nombreFarmaco;
+    public void setNombre(String nombreFarmaco) {
+        this.nombre = nombreFarmaco;
     }
 
     public double getValorFarmaco() {
@@ -52,24 +52,24 @@ public class Farmaco {
         this.valorFarmaco = valorFarmaco;
     }
 
-    public String getIdFarmaco() {
+    public int getIdFarmaco() {
         return idFarmaco;
     }
 
-    public void setIdFarmaco(String idFarmaco) {
+    public void setIdFarmaco(int idFarmaco) {
         this.idFarmaco = idFarmaco;
     }
 
-    public ArrayList<String> getPresentaciones() {
+    public ArrayList<Presentacion> getPresentaciones() {
         return presentaciones;
     }
 
-    public void setPresentaciones(ArrayList<String> presentaciones) {
+    public void setPresentaciones(ArrayList<Presentacion> presentaciones) {
         this.presentaciones = presentaciones;
     }
 
     @Override
     public String toString() {
-        return "Farmaco{" + "nombreFarmaco=" + nombreFarmaco + ", valorFarmaco=" + valorFarmaco + ", idFarmaco=" + idFarmaco + ", presentaciones=" + presentaciones + ", dosificaciones=" + dosificaciones + '}';
+        return "Farmaco{" + "nombre=" + nombre + ", valorFarmaco=" + valorFarmaco + ", idFarmaco=" + idFarmaco + ", presentaciones=" + presentaciones + ", dosificaciones=" + dosificaciones + '}';
     }
 }
