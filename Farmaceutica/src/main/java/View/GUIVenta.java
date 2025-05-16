@@ -4,17 +4,68 @@
  */
 package View;
 
+import Controller.GestionFarmacos;
+import Model.Farmaco;
+import Model.Presentacion;
+import java.io.IOException;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author isaacmgz
  */
 public class GUIVenta extends javax.swing.JFrame {
 
-    /**
-     * Creates new form GUIVenta
-     */
+    private List<Farmaco> listaFarmacos;
+
     public GUIVenta() {
         initComponents();
+        cargarFarmacos();
+        configurarListeners();
+    }
+
+    private void cargarFarmacos() {
+        try {
+            listaFarmacos = GestionFarmacos.cargarTodos();
+            jComboBoxFarmaco.removeAllItems();
+
+            for (Farmaco f : listaFarmacos) {
+                jComboBoxFarmaco.addItem(f.getNombre());
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void configurarListeners() {
+        jComboBoxFarmaco.addActionListener(e -> {
+            int index = jComboBoxFarmaco.getSelectedIndex();
+            if (index >= 0) {
+                Farmaco f = listaFarmacos.get(index);
+                jComboBoxPresentacion.removeAllItems();
+                jComboBoxDosificacion.removeAllItems();
+                for (Presentacion p : f.getPresentaciones()) {
+                    jComboBoxPresentacion.addItem(p.getTipo());
+                }
+            }
+        });
+
+        jComboBoxPresentacion.addActionListener(e -> {
+            int farmacoIndex = jComboBoxFarmaco.getSelectedIndex();
+            int presIndex = jComboBoxPresentacion.getSelectedIndex();
+
+            if (farmacoIndex >= 0 && presIndex >= 0) {
+                Farmaco f = listaFarmacos.get(farmacoIndex);
+                Presentacion p = f.getPresentaciones().get(presIndex);
+
+                jComboBoxDosificacion.removeAllItems();
+                for (String dosis : p.getDosificaciones()) {
+                    jComboBoxDosificacion.addItem(dosis + " " + p.getUnidad());
+                }
+            }
+        });
     }
 
     /**
@@ -54,16 +105,31 @@ public class GUIVenta extends javax.swing.JFrame {
         jLabel1.setText("Modulo de Venta");
 
         jComboBoxFarmaco.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBoxFarmaco.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxFarmacoActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("Farmaco");
 
         jLabel3.setText("Presentación:");
 
         jComboBoxPresentacion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBoxPresentacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxPresentacionActionPerformed(evt);
+            }
+        });
 
         jLabel4.setText("Dosificación:");
 
         jComboBoxDosificacion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBoxDosificacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxDosificacionActionPerformed(evt);
+            }
+        });
 
         jButtonAgregarMed.setText("Agregar Medicamento");
         jButtonAgregarMed.addActionListener(new java.awt.event.ActionListener() {
@@ -232,6 +298,18 @@ public class GUIVenta extends javax.swing.JFrame {
     private void jButtonVerFacturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVerFacturaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonVerFacturaActionPerformed
+
+    private void jComboBoxFarmacoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxFarmacoActionPerformed
+        
+    }//GEN-LAST:event_jComboBoxFarmacoActionPerformed
+
+    private void jComboBoxPresentacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxPresentacionActionPerformed
+        
+    }//GEN-LAST:event_jComboBoxPresentacionActionPerformed
+
+    private void jComboBoxDosificacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxDosificacionActionPerformed
+        
+    }//GEN-LAST:event_jComboBoxDosificacionActionPerformed
 
     /**
      * @param args the command line arguments
