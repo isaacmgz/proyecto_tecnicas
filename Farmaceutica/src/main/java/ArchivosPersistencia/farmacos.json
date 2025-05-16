@@ -1,0 +1,140 @@
+[
+  {
+    "id": 1,
+    "nombre": "Paracetamol",
+    "presentaciones": [
+      {
+        "tipo": "Tableta",
+        "dosificaciones": ["500", "650"],
+        "unidad": "mg",
+        "precioPorUnidad": 0.01
+      },
+      {
+        "tipo": "Jarabe",
+        "dosificaciones": ["120"],
+        "unidad": "mg/5ml",
+        "precioPorUnidad": 0.005
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "nombre": "Ibuprofeno",
+    "presentaciones": [
+      {
+        "tipo": "Cápsula",
+        "dosificaciones": ["200", "400"],
+        "unidad": "mg",
+        "precioPorUnidad": 0.015
+      },
+      {
+        "tipo": "Suspensión",
+        "dosificaciones": ["100"],
+        "unidad": "mg/5ml",
+        "precioPorUnidad": 0.006
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "nombre": "Amoxicilina",
+    "presentaciones": [
+      {
+        "tipo": "Cápsula",
+        "dosificaciones": ["250", "500"],
+        "unidad": "mg",
+        "precioPorUnidad": 0.02
+      },
+      {
+        "tipo": "Tableta masticable",
+        "dosificaciones": ["125", "250"],
+        "unidad": "mg",
+        "precioPorUnidad": 0.018
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "nombre": "Loratadina",
+    "presentaciones": [
+      {
+        "tipo": "Tableta",
+        "dosificaciones": ["10"],
+        "unidad": "mg",
+        "precioPorUnidad": 0.03
+      },
+      {
+        "tipo": "Jarabe",
+        "dosificaciones": ["5"],
+        "unidad": "mg/5ml",
+        "precioPorUnidad": 0.01
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "nombre": "Metformina",
+    "presentaciones": [
+      {
+        "tipo": "Tableta liberación prolongada",
+        "dosificaciones": ["500", "850", "1000"],
+        "unidad": "mg",
+        "precioPorUnidad": 0.025
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "nombre": "Omeprazol",
+    "presentaciones": [
+      {
+        "tipo": "Cápsula entérica",
+        "dosificaciones": ["20"],
+        "unidad": "mg",
+        "precioPorUnidad": 0.04
+      },
+      {
+        "tipo": "Suspensión oral",
+        "dosificaciones": ["2"],
+        "unidad": "mg/ml",
+        "precioPorUnidad": 0.005
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "nombre": "Diclofenaco",
+    "presentaciones": [
+      {
+        "tipo": "Tableta",
+        "dosificaciones": ["50"],
+        "unidad": "mg",
+        "precioPorUnidad": 0.022
+      },
+      {
+        "tipo": "Gel tópico",
+        "dosificaciones": ["1"],
+        "unidad": "g",
+        "precioPorUnidad": 0.1
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "nombre": "Cetirizina",
+    "presentaciones": [
+      {
+        "tipo": "Tableta",
+        "dosificaciones": ["10"],
+        "unidad": "mg",
+        "precioPorUnidad": 0.028
+      },
+      {
+        "tipo": "Jarabe",
+        "dosificaciones": ["1"],
+        "unidad": "mg/ml",
+        "precioPorUnidad": 0.012
+      }
+    ]
+  }
+]
