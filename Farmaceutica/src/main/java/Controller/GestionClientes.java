@@ -4,10 +4,66 @@
  */
 package Controller;
 
+import Model.Cliente;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author isaacmgz
  */
 public class GestionClientes {
+
+    private static final String RUTA = "src/main/java/ArchivosPersistencia/clientes.csv";
+
+    public List<Cliente> cargarTodos() throws IOException {
+        List<Cliente> lista = new ArrayList<>();
+        try (BufferedReader br = Files.newBufferedReader(Paths.get(RUTA))) {
+            String linea = br.readLine(); // salta cabecera
+            while ((linea = br.readLine()) != null) {
+                String[] campos = linea.split(",");
+                Cliente c = new Cliente(
+                        campos[1],
+                        campos[2],
+                        campos[3]
+                );
+                lista.add(c);
+            }
+        }
+        return lista;
+    }
     
+    // Funcion necesaria para actualizar la lista¡  
+    public void guardarTodos(List<Cliente> lista) throws IOException {
+        try (BufferedWriter bw = Files.newBufferedWriter(Paths.get(RUTA))) {
+            bw.write("id,nombreCliente,idCliente,emailCliente");
+            bw.newLine();
+            for (Cliente c : lista) {
+                bw.write(
+                        c.getIdCliente() + ","
+                        + c.getNombreCliente() + ","
+                        + c.getIdCliente() + ","
+                        + c.getEmailCliente()
+                );
+                bw.newLine();
+            }
+        }
+    }
+
+    public void agregarCliente(Cliente nuevo) throws IOException {
+        List<Cliente> lista = cargarTodos();
+        lista.add(nuevo);
+        guardarTodos(lista);
+    }
+
+    public void eliminarPorIdCliente(String idCli) throws IOException {
+        List<Cliente> lista = cargarTodos();
+        lista.removeIf(c -> c.getIdCliente().equals(idCli));
+        guardarTodos(lista);
+    }
 }

@@ -16,6 +16,10 @@ public class Cliente {
 
     public Cliente() {
     }
+    
+    public Cliente(String nombreCliente){
+        this.nombreCliente = nombreCliente;
+    }
 
     public Cliente(String nombreCliente, String idCliente, String emailCliente) {
         this.nombreCliente = nombreCliente;

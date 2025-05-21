@@ -5,6 +5,7 @@
 package Model;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -12,14 +13,19 @@ import java.util.ArrayList;
  */
 public class Presentacion {
     private String tipo;
-    private ArrayList<String> dosificaciones;
+    private List<String> dosificaciones;
     private double precioPorUnidad;
     private String unidad;
 
     public Presentacion() {
     }
+    
+    public Presentacion(String tipo, List<String> dosificaciones){
+        this.tipo = tipo;
+        this.dosificaciones = dosificaciones;
+    }
 
-    public Presentacion(String tipo, ArrayList<String> dosificaciones, double precioPorUnidad, String unidad) {
+    public Presentacion(String tipo, List<String> dosificaciones, double precioPorUnidad, String unidad) {
         this.tipo = tipo;
         this.dosificaciones = dosificaciones;
         this.precioPorUnidad = precioPorUnidad;
@@ -50,11 +56,11 @@ public class Presentacion {
         this.precioPorUnidad = precioUnidad;
     }
 
-    public ArrayList<String> getDosificaciones() {
+    public List<String> getDosificaciones() {
         return dosificaciones;
     }
 
-    public void setDosificaciones(ArrayList<String> dosificaciones) {
+    public void setDosificaciones(List<String> dosificaciones) {
         this.dosificaciones = dosificaciones;
     }
 

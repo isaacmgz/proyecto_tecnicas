@@ -19,6 +19,10 @@ public class Farmaco {
 
     public Farmaco() {
     }
+    
+    public Farmaco(String nombreFarmaco) {
+        this.nombre = nombreFarmaco;
+    }
 
     public Farmaco(String nombreFarmaco, double valorFarmaco, int idFarmaco, ArrayList<Presentacion> presentaciones, ArrayList<String> dosificaciones) {
         this.nombre = nombreFarmaco;
