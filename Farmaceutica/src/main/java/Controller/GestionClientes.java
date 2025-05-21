@@ -37,7 +37,7 @@ public class GestionClientes {
         }
         return lista;
     }
-    
+
     // Funcion necesaria para actualizar la lista¡  
     public void guardarTodos(List<Cliente> lista) throws IOException {
         try (BufferedWriter bw = Files.newBufferedWriter(Paths.get(RUTA))) {
@@ -64,6 +64,30 @@ public class GestionClientes {
     public void eliminarPorIdCliente(String idCli) throws IOException {
         List<Cliente> lista = cargarTodos();
         lista.removeIf(c -> c.getIdCliente().equals(idCli));
+        guardarTodos(lista);
+    }
+    
+    public Cliente buscarPorIdCliente(String idCli) throws IOException {
+    for (Cliente c : cargarTodos()) {
+        if (c.getIdCliente().equals(idCli)) {
+            return c;
+        }
+    }
+    return null;
+}
+
+    public void actualizarCliente(Cliente actualizado) throws IOException {
+        List<Cliente> lista = cargarTodos();
+
+        for (int i = 0; i < lista.size(); i++) {
+            Cliente c = lista.get(i);
+
+            if (c.getIdCliente().equals(actualizado.getIdCliente())) {
+                // sustituye la entrada antigua por la nueva
+                lista.set(i, actualizado);
+                break;
+            }
+        }
         guardarTodos(lista);
     }
 }

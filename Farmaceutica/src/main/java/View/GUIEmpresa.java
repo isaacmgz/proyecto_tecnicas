@@ -4,7 +4,6 @@
  */
 package View;
 
-
 /**
  *
  * @author isaacmgz
@@ -30,6 +29,8 @@ public class GUIEmpresa extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jButtonVenta = new javax.swing.JButton();
         jButtonClientes = new javax.swing.JButton();
+        jToggleButtonRegistroVentas = new javax.swing.JToggleButton();
+        jButtonGestionarFarmacos = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -53,48 +54,82 @@ public class GUIEmpresa extends javax.swing.JFrame {
             }
         });
 
+        jToggleButtonRegistroVentas.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
+        jToggleButtonRegistroVentas.setText("Ver registro ventas");
+        jToggleButtonRegistroVentas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jToggleButtonRegistroVentasActionPerformed(evt);
+            }
+        });
+
+        jButtonGestionarFarmacos.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
+        jButtonGestionarFarmacos.setText("Gestionar Farmacos");
+        jButtonGestionarFarmacos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonGestionarFarmacosActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(131, 131, 131)
-                .addComponent(jButtonVenta)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 208, Short.MAX_VALUE)
-                .addComponent(jButtonClientes)
-                .addGap(123, 123, 123))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(229, 229, 229)
+                .addGap(95, 95, 95)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButtonVenta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButtonGestionarFarmacos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 204, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jToggleButtonRegistroVentas, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButtonClientes, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(114, 114, 114))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(235, 235, 235))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(18, 18, 18)
+                .addContainerGap(17, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addGap(63, 63, 63)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonVenta)
+                    .addComponent(jToggleButtonRegistroVentas))
+                .addGap(33, 33, 33)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonGestionarFarmacos)
                     .addComponent(jButtonClientes))
-                .addContainerGap(61, Short.MAX_VALUE))
+                .addGap(42, 42, 42))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    
+
     // Se settea la empresa
-        
-    
+
     private void jButtonVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVentaActionPerformed
-        // Se crea la nueva ventana
-        
+        GUIVenta ventaWin = new GUIVenta();
+        ventaWin.setVisible(true);
+
     }//GEN-LAST:event_jButtonVentaActionPerformed
 
     private void jButtonClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonClientesActionPerformed
-        //GUICliente guiCliente = new GUICliente();
-        //guiCliente.setVisible(true);
+        GUIAdminCliente adminCliWin = new GUIAdminCliente();
+        adminCliWin.setVisible(true);
     }//GEN-LAST:event_jButtonClientesActionPerformed
+
+    private void jToggleButtonRegistroVentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButtonRegistroVentasActionPerformed
+        GUIRegistroVenta registroWin = new GUIRegistroVenta();
+        registroWin.setVisible(true);
+    }//GEN-LAST:event_jToggleButtonRegistroVentasActionPerformed
+
+    private void jButtonGestionarFarmacosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGestionarFarmacosActionPerformed
+        GUIGestionarFarmaco farmacoWin = new GUIGestionarFarmaco();
+        farmacoWin.setVisible(true);
+    }//GEN-LAST:event_jButtonGestionarFarmacosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -134,7 +169,9 @@ public class GUIEmpresa extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonClientes;
+    private javax.swing.JButton jButtonGestionarFarmacos;
     private javax.swing.JButton jButtonVenta;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JToggleButton jToggleButtonRegistroVentas;
     // End of variables declaration//GEN-END:variables
 }

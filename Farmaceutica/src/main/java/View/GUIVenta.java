@@ -8,9 +8,11 @@ import Controller.GestionFarmacos;
 import Model.Farmaco;
 import Model.Presentacion;
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -84,7 +86,7 @@ public class GUIVenta extends javax.swing.JFrame {
         jComboBoxPresentacion = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
         jComboBoxDosificacion = new javax.swing.JComboBox<>();
-        jButtonAgregarMed = new javax.swing.JToggleButton();
+        jButtonAgregarFarmaco = new javax.swing.JToggleButton();
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -97,6 +99,8 @@ public class GUIVenta extends javax.swing.JFrame {
         jFieldCliente = new javax.swing.JTextField();
         jFieldNIT = new javax.swing.JTextField();
         jFieldEmail = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        jTCantidadFar = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -131,10 +135,10 @@ public class GUIVenta extends javax.swing.JFrame {
             }
         });
 
-        jButtonAgregarMed.setText("Agregar Medicamento");
-        jButtonAgregarMed.addActionListener(new java.awt.event.ActionListener() {
+        jButtonAgregarFarmaco.setText("Agregar Farmaco");
+        jButtonAgregarFarmaco.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonAgregarMedActionPerformed(evt);
+                jButtonAgregarFarmacoActionPerformed(evt);
             }
         });
 
@@ -144,10 +148,7 @@ public class GUIVenta extends javax.swing.JFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+
             },
             new String [] {
                 "Fármaco", "Presentación", "Dosificación", "Cantidad", "Valor Fármaco", "Gravamen", "Valor Total"
@@ -179,7 +180,7 @@ public class GUIVenta extends javax.swing.JFrame {
             jTable1.getColumnModel().getColumn(6).setResizable(false);
         }
 
-        jButtonVerFactura.setText("Ver Factura");
+        jButtonVerFactura.setText("Generar Factura");
         jButtonVerFactura.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonVerFacturaActionPerformed(evt);
@@ -200,6 +201,10 @@ public class GUIVenta extends javax.swing.JFrame {
 
         jFieldEmail.setText("jFieldEmail");
 
+        jLabel8.setText("Cantidad:");
+
+        jTCantidadFar.setText("jTCantidadFar");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -209,32 +214,10 @@ public class GUIVenta extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(202, 202, 202)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(44, 44, 44)
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jComboBoxFarmaco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(34, 34, 34)
-                        .addComponent(jLabel3)
-                        .addGap(18, 18, 18)
-                        .addComponent(jComboBoxPresentacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(38, 38, 38)
-                        .addComponent(jLabel4)
-                        .addGap(28, 28, 28)
-                        .addComponent(jComboBoxDosificacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(24, 24, 24)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 694, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(192, 192, 192)
+                        .addGap(191, 191, 191)
                         .addComponent(jButtonVerFactura)
                         .addGap(90, 90, 90)
                         .addComponent(jButtonEliminarFactura))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(254, 254, 254)
-                        .addComponent(jButtonAgregarMed))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(51, 51, 51)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -245,15 +228,44 @@ public class GUIVenta extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jFieldCliente, javax.swing.GroupLayout.DEFAULT_SIZE, 186, Short.MAX_VALUE)
                             .addComponent(jFieldNIT)
-                            .addComponent(jFieldEmail))))
+                            .addComponent(jFieldEmail)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(24, 24, 24)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 694, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel2)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jComboBoxFarmaco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(34, 34, 34)
+                                        .addComponent(jLabel3))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(41, 41, 41)
+                                        .addComponent(jLabel8)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jTCantidadFar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(28, 28, 28)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jButtonAgregarFarmaco)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jComboBoxPresentacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(48, 48, 48)
+                                        .addComponent(jLabel4)
+                                        .addGap(28, 28, 28)
+                                        .addComponent(jComboBoxDosificacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(200, 200, 200)
+                        .addComponent(jLabel1)))
                 .addContainerGap(20, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(17, 17, 17)
+                .addGap(41, 41, 41)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -278,37 +290,82 @@ public class GUIVenta extends javax.swing.JFrame {
                     .addComponent(jLabel4)
                     .addComponent(jComboBoxDosificacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButtonAgregarMed)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(jTCantidadFar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonAgregarFarmaco))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonVerFactura)
                     .addComponent(jButtonEliminarFactura))
-                .addContainerGap(39, Short.MAX_VALUE))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButtonAgregarMedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAgregarMedActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonAgregarMedActionPerformed
+    private void jButtonAgregarFarmacoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAgregarFarmacoActionPerformed
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+
+        // índices de selección
+        int farmIndex = jComboBoxFarmaco.getSelectedIndex();
+        int presIndex = jComboBoxPresentacion.getSelectedIndex();
+
+        // objeto fármaco y presentación
+        Farmaco f = listaFarmacos.get(farmIndex);
+        Presentacion p = f.getPresentaciones().get(presIndex);
+
+        // dosis como texto (ej: "500 mg") y valor numérico de dosis
+        String dosisStr = jComboBoxDosificacion.getSelectedItem().toString();
+        double dosisValue = Double.parseDouble(dosisStr.split(" ")[0]);
+
+        // precio unidad y cálculos
+        double precioUnidad = p.getPrecioPorUnidad();
+        double valorFarmaco = precioUnidad * dosisValue;
+        double gravamen = valorFarmaco * 0.19;
+
+        // cantidad de unidades
+        int cantidad = 1;
+        try {
+            cantidad = Integer.parseInt(jTCantidadFar.getText().trim());
+        } catch (NumberFormatException ex) {
+            // queda 1 por defecto
+        }
+
+        // valor total
+        double valorTotal = valorFarmaco * cantidad + gravamen;
+
+        // formateo
+        DecimalFormat df = new DecimalFormat("#,##0.00 $");
+
+        // añade la fila en el orden de columnas
+        model.addRow(new Object[]{
+            f.getNombre(),
+            p.getTipo(),
+            dosisStr,
+            cantidad,
+            df.format(valorFarmaco),
+            df.format(gravamen),
+            df.format(valorTotal)
+        });
+    }//GEN-LAST:event_jButtonAgregarFarmacoActionPerformed
 
     private void jButtonVerFacturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVerFacturaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonVerFacturaActionPerformed
 
     private void jComboBoxFarmacoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxFarmacoActionPerformed
-        
+
     }//GEN-LAST:event_jComboBoxFarmacoActionPerformed
 
     private void jComboBoxPresentacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxPresentacionActionPerformed
-        
+
     }//GEN-LAST:event_jComboBoxPresentacionActionPerformed
 
     private void jComboBoxDosificacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxDosificacionActionPerformed
-        
+
     }//GEN-LAST:event_jComboBoxDosificacionActionPerformed
 
     /**
@@ -347,7 +404,7 @@ public class GUIVenta extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JToggleButton jButtonAgregarMed;
+    private javax.swing.JToggleButton jButtonAgregarFarmaco;
     private javax.swing.JToggleButton jButtonEliminarFactura;
     private javax.swing.JToggleButton jButtonVerFactura;
     private javax.swing.JComboBox<String> jComboBoxDosificacion;
@@ -363,9 +420,11 @@ public class GUIVenta extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JTextField jTCantidadFar;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }

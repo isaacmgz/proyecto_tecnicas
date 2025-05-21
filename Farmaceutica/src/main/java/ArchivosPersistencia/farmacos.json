@@ -7,13 +7,13 @@
         "tipo": "Tableta",
         "dosificaciones": ["500", "650"],
         "unidad": "mg",
-        "precioPorUnidad": 0.01
+        "precioPorUnidad": 41.74
       },
       {
         "tipo": "Jarabe",
         "dosificaciones": ["120"],
         "unidad": "mg/5ml",
-        "precioPorUnidad": 0.005
+        "precioPorUnidad": 20.87
       }
     ]
   },
@@ -25,13 +25,13 @@
         "tipo": "Cápsula",
         "dosificaciones": ["200", "400"],
         "unidad": "mg",
-        "precioPorUnidad": 0.015
+        "precioPorUnidad": 62.61
       },
       {
         "tipo": "Suspensión",
         "dosificaciones": ["100"],
         "unidad": "mg/5ml",
-        "precioPorUnidad": 0.006
+        "precioPorUnidad": 25.04
       }
     ]
   },
@@ -43,13 +43,13 @@
         "tipo": "Cápsula",
         "dosificaciones": ["250", "500"],
         "unidad": "mg",
-        "precioPorUnidad": 0.02
+        "precioPorUnidad": 83.47
       },
       {
         "tipo": "Tableta masticable",
         "dosificaciones": ["125", "250"],
         "unidad": "mg",
-        "precioPorUnidad": 0.018
+        "precioPorUnidad": 75.13
       }
     ]
   },
@@ -61,13 +61,13 @@
         "tipo": "Tableta",
         "dosificaciones": ["10"],
         "unidad": "mg",
-        "precioPorUnidad": 0.03
+        "precioPorUnidad": 125.21
       },
       {
         "tipo": "Jarabe",
         "dosificaciones": ["5"],
         "unidad": "mg/5ml",
-        "precioPorUnidad": 0.01
+        "precioPorUnidad": 41.74
       }
     ]
   },
@@ -79,7 +79,7 @@
         "tipo": "Tableta liberación prolongada",
         "dosificaciones": ["500", "850", "1000"],
         "unidad": "mg",
-        "precioPorUnidad": 0.025
+        "precioPorUnidad": 104.34
       }
     ]
   },
@@ -91,13 +91,13 @@
         "tipo": "Cápsula entérica",
         "dosificaciones": ["20"],
         "unidad": "mg",
-        "precioPorUnidad": 0.04
+        "precioPorUnidad": 166.95
       },
       {
         "tipo": "Suspensión oral",
         "dosificaciones": ["2"],
         "unidad": "mg/ml",
-        "precioPorUnidad": 0.005
+        "precioPorUnidad": 20.87
       }
     ]
   },
@@ -109,13 +109,13 @@
         "tipo": "Tableta",
         "dosificaciones": ["50"],
         "unidad": "mg",
-        "precioPorUnidad": 0.022
+        "precioPorUnidad": 91.82
       },
       {
         "tipo": "Gel tópico",
         "dosificaciones": ["1"],
         "unidad": "g",
-        "precioPorUnidad": 0.1
+        "precioPorUnidad": 417.37
       }
     ]
   },
@@ -127,13 +127,13 @@
         "tipo": "Tableta",
         "dosificaciones": ["10"],
         "unidad": "mg",
-        "precioPorUnidad": 0.028
+        "precioPorUnidad": 116.86
       },
       {
         "tipo": "Jarabe",
         "dosificaciones": ["1"],
         "unidad": "mg/ml",
-        "precioPorUnidad": 0.012
+        "precioPorUnidad": 50.08
       }
     ]
   }

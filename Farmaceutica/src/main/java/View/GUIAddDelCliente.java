@@ -30,14 +30,16 @@ public class GUIAddDelCliente extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jToggleButton1 = new javax.swing.JToggleButton();
-        jToggleButton2 = new javax.swing.JToggleButton();
+        jTNombreCli = new javax.swing.JTextField();
+        jTNITCli = new javax.swing.JTextField();
+        jTEmailCli = new javax.swing.JTextField();
+        jToggleButtonAddCli = new javax.swing.JToggleButton();
+        jToggleButtonDelCli = new javax.swing.JToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jLabel1.setFont(new java.awt.Font("Liberation Sans", 0, 24)); // NOI18N
+        jLabel1.setForeground(java.awt.SystemColor.info);
         jLabel1.setText("Administrar Clientes");
 
         jLabel2.setText("Cliente:");
@@ -46,15 +48,15 @@ public class GUIAddDelCliente extends javax.swing.JFrame {
 
         jLabel4.setText("Email");
 
-        jTextField1.setText("jTextField1");
+        jTNombreCli.setText("jTNombreCli");
 
-        jTextField2.setText("jTextField2");
+        jTNITCli.setText("jTNITCli");
 
-        jTextField3.setText("jTextField3");
+        jTEmailCli.setText("jTEmailCli");
 
-        jToggleButton1.setText("Agregar Cliente");
+        jToggleButtonAddCli.setText("Agregar Cliente");
 
-        jToggleButton2.setText("Eliminar Cliente");
+        jToggleButtonDelCli.setText("Eliminar Cliente");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -73,14 +75,14 @@ public class GUIAddDelCliente extends javax.swing.JFrame {
                             .addComponent(jLabel4))
                         .addGap(29, 29, 29)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE)
-                            .addComponent(jTextField2)
-                            .addComponent(jTextField3)))
+                            .addComponent(jTNombreCli, javax.swing.GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE)
+                            .addComponent(jTNITCli)
+                            .addComponent(jTEmailCli)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(130, 130, 130)
-                        .addComponent(jToggleButton1)
+                        .addComponent(jToggleButtonAddCli)
                         .addGap(117, 117, 117)
-                        .addComponent(jToggleButton2)))
+                        .addComponent(jToggleButtonDelCli)))
                 .addContainerGap(149, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -91,20 +93,20 @@ public class GUIAddDelCliente extends javax.swing.JFrame {
                 .addGap(32, 32, 32)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTNombreCli, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTNITCli, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTEmailCli, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(40, 40, 40)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jToggleButton1)
-                    .addComponent(jToggleButton2))
-                .addContainerGap(55, Short.MAX_VALUE))
+                    .addComponent(jToggleButtonAddCli)
+                    .addComponent(jToggleButtonDelCli))
+                .addContainerGap(45, Short.MAX_VALUE))
         );
 
         pack();
@@ -150,10 +152,10 @@ public class GUIAddDelCliente extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JToggleButton jToggleButton1;
-    private javax.swing.JToggleButton jToggleButton2;
+    private javax.swing.JTextField jTEmailCli;
+    private javax.swing.JTextField jTNITCli;
+    private javax.swing.JTextField jTNombreCli;
+    private javax.swing.JToggleButton jToggleButtonAddCli;
+    private javax.swing.JToggleButton jToggleButtonDelCli;
     // End of variables declaration//GEN-END:variables
 }

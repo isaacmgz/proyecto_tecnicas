@@ -33,7 +33,7 @@ public class GestionFarmacos {
         }
     }
 
-    // si necesitas guardarlos tras cambios
+    // Guardarlos tras cambio
     public void guardarTodos(List<Farmaco> lista) throws IOException {
         try (FileWriter writer = new FileWriter(RUTA)) {
             gson.toJson(lista, writer);
@@ -65,4 +65,21 @@ public class GestionFarmacos {
         }
     }
 
+    /**
+     * Agrega un nuevo fármaco al JSON
+     */
+    public void agregarFarmaco(Farmaco nuevo) throws IOException {
+        List<Farmaco> lista = cargarTodos();
+        lista.add(nuevo);
+        guardarTodos(lista);
+    }
+
+    /**
+     * Elimina el fármaco cuyo idFarmaco coincida
+     */
+    public void eliminarFarmacoPorId(int idFarmaco) throws IOException {
+        List<Farmaco> lista = cargarTodos();
+        lista.removeIf(f -> f.getIdFarmaco() == idFarmaco);
+        guardarTodos(lista);
+    }
 }
