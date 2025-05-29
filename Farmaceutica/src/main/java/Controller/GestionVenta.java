@@ -1,47 +1,65 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Controller;
 
-import Model.Farmaco;
-import Model.Presentacion;
+import Model.*;
 import java.io.IOException;
 import java.util.List;
-import Controller.GestionFarmacos.*;
-import Model.Cliente;
-import Model.Venta;
-
 import java.io.*;
 import java.nio.file.*;
 import java.time.LocalDate;
 import java.util.*;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author isaacmgz
  */
+
 public class GestionVenta {
 
     private static final String RUTA = "src/main/java/ArchivosPersistencia/ventas.csv";
 
-    // Registra una venta nueva en el CSV
+    private int getNextVentaIndex() throws IOException {
+        Path path = Paths.get(RUTA);
+        if (Files.notExists(path)) {
+            return 1;
+        }
+        int max = 0;
+        try (BufferedReader br = Files.newBufferedReader(path)) {
+            br.readLine(); // saltar cabecera
+            String line;
+            while ((line = br.readLine()) != null) {
+                String id = line.split(",")[0];    
+                if (id.startsWith("V")) {
+                    try {
+                        int n = Integer.parseInt(id.substring(1));
+                        max = Math.max(max, n);
+                    } catch (NumberFormatException e) {
+                    }
+                }
+            }
+        }
+        return max + 1;
+    }
+
+    // ------ Registra una venta nueva en el CSV. --------
     public void registrarVenta(Venta v) throws IOException {
         // Asegura que exista el archivo con cabecera
         Path path = Paths.get(RUTA);
         if (Files.notExists(path)) {
             try (BufferedWriter bw = Files.newBufferedWriter(path)) {
                 bw.write("idVenta,fechaVenta,nombreCliente,nombreFarmaco,"
-                        + "presentacion,dosificacion,valorUnidad");
+                        + "presentacion,dosificacion,unidadesVendidas,valorTotal");
                 bw.newLine();
             }
         }
 
-        // Añade línea con datos de la venta
-        try (BufferedWriter bw = Files.newBufferedWriter(
-                path,
-                StandardOpenOption.APPEND)) {
+        // calcula el siguiente ID
+        int next = getNextVentaIndex();
+        String idVenta = "V" + next;
+        v.setIdVenta(idVenta);
 
+        try (BufferedWriter bw = Files.newBufferedWriter(path, StandardOpenOption.APPEND)) {
             String linea = String.join(",",
                     v.getIdVenta(),
                     v.getFechaVenta().toString(),
@@ -52,12 +70,11 @@ public class GestionVenta {
                     String.valueOf(v.getUnidadesVendidas()),
                     String.valueOf(v.getValorTotal())
             );
-
             bw.write(linea);
             bw.newLine();
         }
     }
-    
+
     // Lee todas las ventas del CSV
     public List<Venta> cargarTodas() throws IOException {
         List<Venta> lista = new ArrayList<>();
@@ -91,10 +108,45 @@ public class GestionVenta {
         }
         return lista;
     }
+
+    public double calcularIVA(double valorUnitario, int cantidad) {
+        double tasaIVA = 0.19;
+        return valorUnitario * tasaIVA * cantidad;
+    }
+
+    public void mostrarVentasEnTabla(JTable tabla) {
+        try {
+            GestionVenta gestor = new GestionVenta();
+
+            List<Venta> listaVentas = gestor.cargarTodas(); // Asegúrate de tener este método
+
+            DefaultTableModel modelo = new DefaultTableModel();
+            modelo.addColumn("idVenta");
+            modelo.addColumn("Fecha Venta");
+            modelo.addColumn("Cliente");
+            modelo.addColumn("Farmaco");
+            modelo.addColumn("Presentacion");
+            modelo.addColumn("Cantidad");
+            modelo.addColumn("Valor Total");
+
+            for (Venta v : listaVentas) {
+                modelo.addRow(new Object[]{
+                    v.getIdVenta(),
+                    v.getFechaVenta().toString(),
+                    v.getCliente().getNombreCliente(),
+                    v.getFarmaco().getNombre(),
+                    v.getPresentacion().getTipo(),
+                    v.getUnidadesVendidas(),
+                    v.getValorTotal() + " $"
+                });
+            }
+
+            tabla.setModel(modelo);
+
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            javax.swing.JOptionPane.showMessageDialog(null, "Error al cargar las ventas.");
+        }
+    }
+
 }
-
-/*
-    Construye un objeto Venta tras la venta.
-
-    Llama a new VentaRepository().registrarVenta(miVenta);
- */

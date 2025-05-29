@@ -9,8 +9,4 @@ package com.mycompany.farmaceutica;
  * @author isaacmgz
  */
 public class Farmaceutica {
-
-    public static void main(String[] args) {
-        System.out.println("Hello World!");
-    }
 }

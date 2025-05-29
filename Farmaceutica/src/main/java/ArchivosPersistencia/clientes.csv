@@ -1,4 +1,4 @@
-id,nombreCliente,idCliente,egmailCliente
+id,nombreCliente,idCliente,emailCliente
 1,María Pérez,CLI001,maria.perez@gmail.com
 2,Juan Rodríguez,CLI002,juan.rodriguez@gmail.com
 3,Ana Gómez,CLI003,ana.gomez@gmail.com
@@ -14,4 +14,4 @@ id,nombreCliente,idCliente,egmailCliente
 13,Valentina Cruz,CLI013,valentina.cruz@gmail.com
 14,Samuel Díaz,CLI014,samuel.diaz@gmail.com
 15,Isabel Núñez,CLI015,isabel.nunez@gmail.com
-
+16,Isaac Mesa,CLI016,isaac@gmail.com

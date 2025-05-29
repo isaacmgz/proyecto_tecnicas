@@ -1,8 +1,11 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package View;
+
+import Controller.*;
+import Model.*;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -13,8 +16,36 @@ public class GUIGestionarFarmaco extends javax.swing.JFrame {
     /**
      * Creates new form GUIAgregarMedicamento
      */
+    private ILista<Farmaco> repoFarmacos = new GestionFarmacos();
+    private List<Farmaco> listaFarmacosGestion;
+
     public GUIGestionarFarmaco() {
         initComponents();
+        this.setLocationRelativeTo(null);
+        cargarListadoFarmacos();
+    }
+
+    private void cargarListadoFarmacos() {
+        try {
+            listaFarmacosGestion = repoFarmacos.cargarTodos();
+            jComboBoxEliminarFarmaco.removeAllItems();
+            for (Farmaco f : listaFarmacosGestion) {
+                jComboBoxEliminarFarmaco.addItem(f.getNombre());
+            }
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(this,
+                    "No se pudieron cargar los fármacos: " + ex.getMessage(),
+                    "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    private void limpiarCamposYRefrescar() {
+        jTNuevoFarmaco.setText("");
+        jTIdNuevoFarmaco.setText("");
+        jTPresentacionesNuevas.setText("");
+        jTDosificacionesNuevas.setText("");
+        jTUnidadNuevoFarmaco.setText("");
+        cargarListadoFarmacos();
     }
 
     /**
@@ -39,9 +70,12 @@ public class GUIGestionarFarmaco extends javax.swing.JFrame {
         jTPresentacionesNuevas = new javax.swing.JTextField();
         jTDosificacionesNuevas = new javax.swing.JTextField();
         jTUnidadNuevoFarmaco = new javax.swing.JTextField();
-        jTIdEliminarFarmaco = new javax.swing.JTextField();
         jButtonAgregarFarmaco = new javax.swing.JButton();
         jButtonEliminarFarmaco = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        jComboBoxEliminarFarmaco = new javax.swing.JComboBox<>();
+        jLabel9 = new javax.swing.JLabel();
+        jTPrecioUnidad = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -63,23 +97,43 @@ public class GUIGestionarFarmaco extends javax.swing.JFrame {
         jLabel7.setForeground(javax.swing.UIManager.getDefaults().getColor("Component.error.focusedBorderColor"));
         jLabel7.setText("Eliminar Farmaco");
 
-        jLabel8.setText("id Farmaco Eliminar:");
-
-        jTNuevoFarmaco.setText("jTNuevoFarmaco");
-
-        jTIdNuevoFarmaco.setText("jTIdNuevoFarmaco");
-
-        jTPresentacionesNuevas.setText("jTPresentacionesNuevas");
-
-        jTDosificacionesNuevas.setText("jTDosificacionesNuevas");
-
-        jTUnidadNuevoFarmaco.setText("jTUnidadNuevoFarmaco");
-
-        jTIdEliminarFarmaco.setText("jTIdEliminarFarmaco");
+        jLabel8.setText("Farmaco Eliminar:");
 
         jButtonAgregarFarmaco.setText("Agregar Farmaco");
+        jButtonAgregarFarmaco.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAgregarFarmacoActionPerformed(evt);
+            }
+        });
 
         jButtonEliminarFarmaco.setText("Eliminar Farmaco");
+        jButtonEliminarFarmaco.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonEliminarFarmacoActionPerformed(evt);
+            }
+        });
+
+        jButton1.setText("Atras");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jComboBoxEliminarFarmaco.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBoxEliminarFarmaco.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxEliminarFarmacoActionPerformed(evt);
+            }
+        });
+
+        jLabel9.setText("Precio unidad:");
+
+        jTPrecioUnidad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTPrecioUnidadActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -88,49 +142,58 @@ public class GUIGestionarFarmaco extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(54, 54, 54)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(layout.createSequentialGroup()
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel4)
-                            .addGap(18, 18, 18)
-                            .addComponent(jTPresentacionesNuevas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel5)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jTDosificacionesNuevas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jLabel5))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jTDosificacionesNuevas, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
+                            .addComponent(jTPresentacionesNuevas)))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTUnidadNuevoFarmaco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jTUnidadNuevoFarmaco, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(50, 50, 50)
+                        .addComponent(jLabel9)
+                        .addGap(18, 18, 18)
+                        .addComponent(jTPrecioUnidad, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addGap(18, 18, 18)
-                        .addComponent(jTNuevoFarmaco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(75, 75, 75)
+                        .addComponent(jTNuevoFarmaco, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(23, 23, 23)
                         .addComponent(jLabel3)
-                        .addGap(29, 29, 29)
-                        .addComponent(jTIdNuevoFarmaco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(45, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jTIdNuevoFarmaco, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(106, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(185, 185, 185)
                 .addComponent(jLabel8)
-                .addGap(88, 88, 88)
-                .addComponent(jTIdEliminarFarmaco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(237, 237, 237))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jButtonAgregarFarmaco)
-                        .addGap(262, 262, 262))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jButtonEliminarFarmaco)
-                        .addGap(260, 260, 260))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel7)
-                        .addGap(238, 238, 238))))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addComponent(jLabel1)
+                            .addGap(237, 237, 237))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addComponent(jButtonEliminarFarmaco)
+                            .addGap(167, 167, 167)
+                            .addComponent(jButton1)
+                            .addGap(17, 17, 17)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jButtonAgregarFarmaco)
+                                .addGap(76, 76, 76))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jComboBoxEliminarFarmaco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel7))
+                                .addGap(52, 52, 52)))
+                        .addGap(35, 35, 35))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -154,22 +217,118 @@ public class GUIGestionarFarmaco extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(jTUnidadNuevoFarmaco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTUnidadNuevoFarmaco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel9)
+                    .addComponent(jTPrecioUnidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jButtonAgregarFarmaco)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
                 .addComponent(jLabel7)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
-                    .addComponent(jTIdEliminarFarmaco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jComboBoxEliminarFarmaco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jButtonEliminarFarmaco)
-                .addGap(30, 30, 30))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButtonEliminarFarmaco)
+                        .addGap(40, 40, 40))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jButton1)
+                        .addGap(15, 15, 15))))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        GUIEmpresa empresaWin = new GUIEmpresa();
+        empresaWin.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButtonAgregarFarmacoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAgregarFarmacoActionPerformed
+        try {
+    // --------  Validaciones básicas. ------------
+    String nombre = jTNuevoFarmaco.getText().trim();
+    String idText = jTIdNuevoFarmaco.getText().trim();
+    String unidad = jTUnidadNuevoFarmaco.getText().trim();
+    String presText = jTPresentacionesNuevas.getText().trim();
+    String dosisText = jTDosificacionesNuevas.getText().trim();
+    String precioText = jTPrecioUnidad.getText().trim(); 
+
+    if (nombre.isEmpty() || idText.isEmpty() 
+        || unidad.isEmpty() || presText.isEmpty() 
+        || dosisText.isEmpty() || precioText.isEmpty()) {
+      JOptionPane.showMessageDialog(this, "Completa todos los campos.");
+      return;
+    }
+
+    int id = Integer.parseInt(idText);
+    double precio = Double.parseDouble(precioText);
+
+    // ----- Comprueba duplicado por id. ------
+    if (repoFarmacos.obtener(idText) != null) {
+      JOptionPane.showMessageDialog(this,
+        "El ID ya existe: " + idText,
+        "Aviso", JOptionPane.WARNING_MESSAGE);
+      return;
+    }
+
+    // -- Construye lista de dosificaciones (también para el Farmaco). --
+    ArrayList<String> dosList = new ArrayList<>();
+    for (String d : dosisText.split(",")) {
+      dosList.add(d.trim());
+    }
+
+    // ------- Construye las Presentaciones. ----------
+    ArrayList<Presentacion> presList = new ArrayList<>();
+    for (String tipo : presText.split(",")) {
+      Presentacion p = new Presentacion();
+      p.setTipo(tipo.trim());
+      p.setUnidad(unidad);
+      p.setDosificaciones(new ArrayList<>(dosList));
+      p.setPrecioUnidad(precio);
+      presList.add(p);
+    }
+
+    // --- Farmaco completo. ---
+    Farmaco farm = new Farmaco();
+    farm.setIdFarmaco(id);
+    farm.setNombre(nombre);
+    farm.setValorFarmaco(precio);        
+    farm.setDosificaciones(dosList);     
+    farm.setPresentaciones(presList);
+
+    // -- Agregar y refrescar. --
+    repoFarmacos.agregar(farm);
+    JOptionPane.showMessageDialog(this, "Fármaco agregado con éxito.");
+    limpiarCamposYRefrescar();
+
+  } catch (NumberFormatException ex) {
+    JOptionPane.showMessageDialog(this, "ID o precio inválido.");
+  }
+    }//GEN-LAST:event_jButtonAgregarFarmacoActionPerformed
+
+    private void jButtonEliminarFarmacoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEliminarFarmacoActionPerformed
+        int sel = jComboBoxEliminarFarmaco.getSelectedIndex();
+        if (sel < 0) {
+            JOptionPane.showMessageDialog(this, "Selecciona un fármaco.");
+            return;
+        }
+        Farmaco f = listaFarmacosGestion.get(sel);
+        repoFarmacos.eliminar(String.valueOf(f.getIdFarmaco()));
+        JOptionPane.showMessageDialog(this, "Fármaco “" + f.getNombre() + "” eliminado.");
+        limpiarCamposYRefrescar();
+    }//GEN-LAST:event_jButtonEliminarFarmacoActionPerformed
+
+    private void jComboBoxEliminarFarmacoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxEliminarFarmacoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBoxEliminarFarmacoActionPerformed
+
+    private void jTPrecioUnidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTPrecioUnidadActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTPrecioUnidadActionPerformed
 
     /**
      * @param args the command line arguments
@@ -210,8 +369,10 @@ public class GUIGestionarFarmaco extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonAgregarFarmaco;
     private javax.swing.JButton jButtonEliminarFarmaco;
+    private javax.swing.JComboBox<String> jComboBoxEliminarFarmaco;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -220,10 +381,11 @@ public class GUIGestionarFarmaco extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JTextField jTDosificacionesNuevas;
-    private javax.swing.JTextField jTIdEliminarFarmaco;
     private javax.swing.JTextField jTIdNuevoFarmaco;
     private javax.swing.JTextField jTNuevoFarmaco;
+    private javax.swing.JTextField jTPrecioUnidad;
     private javax.swing.JTextField jTPresentacionesNuevas;
     private javax.swing.JTextField jTUnidadNuevoFarmaco;
     // End of variables declaration//GEN-END:variables

@@ -1,11 +1,6 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Controller;
 
 import Model.Farmaco;
-import Model.Presentacion;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import java.io.FileReader;
@@ -18,68 +13,66 @@ import java.util.ArrayList;
  *
  * @author isaacmgz
  */
-public class GestionFarmacos {
+
+
+public class GestionFarmacos implements ILista<Farmaco> {
 
     private static final String RUTA = "src/main/java/ArchivosPersistencia/farmacos.json";
-    private static Gson gson = new Gson();
+    private static final Gson gson = new Gson();
 
-    public static List<Farmaco> cargarTodos() throws IOException {
-        try (FileReader reader = new FileReader(RUTA)) {
-            return gson.fromJson(
-                    reader,
-                    new TypeToken<List<Farmaco>>() {
-                    }.getType()
-            );
+    @Override
+    public void agregar(Farmaco nuevo) {
+        try {
+            List<Farmaco> lista = cargarTodos();
+            lista.add(nuevo);
+            guardarTodos(lista);
+        } catch (IOException ex) {
+            ex.printStackTrace();
         }
     }
 
-    // Guardarlos tras cambio
+    @Override
+    public void eliminar(String id) {
+        try {
+            int idFarmaco = Integer.parseInt(id);
+            List<Farmaco> lista = cargarTodos();
+            lista.removeIf(f -> f.getIdFarmaco() == idFarmaco);
+            guardarTodos(lista);
+        } catch (IOException | NumberFormatException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    @Override
+    public Farmaco obtener(String id) {
+        try {
+            int idFarmaco = Integer.parseInt(id);
+            for (Farmaco f : cargarTodos()) {
+                if (f.getIdFarmaco() == idFarmaco) {
+                    return f;
+                }
+            }
+        } catch (IOException | NumberFormatException ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
+    public List<Farmaco> cargarTodos() throws IOException {
+        try (FileReader reader = new FileReader(RUTA)) {
+            List<Farmaco> lista = gson.fromJson(
+                reader,
+                new TypeToken<List<Farmaco>>() {}.getType()
+            );
+            return lista != null ? lista : new ArrayList<>();
+        }
+    }
+
+    @Override
     public void guardarTodos(List<Farmaco> lista) throws IOException {
         try (FileWriter writer = new FileWriter(RUTA)) {
             gson.toJson(lista, writer);
         }
-    }
-    
-    public static void ImportarFarmaco() {
-
-        try {
-            // lee todos los fármacos
-            List<Farmaco> lista = cargarTodos();
-            // busca uno por id
-            int idBuscado = 3;
-            for (Farmaco f : lista) {
-                if (f.getIdFarmaco()== idBuscado) {
-                    System.out.println("Nombre: " + f.getNombre());
-                    for (Presentacion p : f.getPresentaciones()) {
-                        System.out.println(
-                                "  - " + p.getTipo()
-                                + " (dosificaciones: " + p.getDosificaciones()
-                                + ", precio unidad: " + p.getPrecioPorUnidad()
-                                + " " + p.getUnidad() + ")"
-                        );
-                    }
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    /**
-     * Agrega un nuevo fármaco al JSON
-     */
-    public void agregarFarmaco(Farmaco nuevo) throws IOException {
-        List<Farmaco> lista = cargarTodos();
-        lista.add(nuevo);
-        guardarTodos(lista);
-    }
-
-    /**
-     * Elimina el fármaco cuyo idFarmaco coincida
-     */
-    public void eliminarFarmacoPorId(int idFarmaco) throws IOException {
-        List<Farmaco> lista = cargarTodos();
-        lista.removeIf(f -> f.getIdFarmaco() == idFarmaco);
-        guardarTodos(lista);
     }
 }

@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package View;
 
 /**
@@ -10,9 +6,6 @@ package View;
  */
 public class GUIEmpresa extends javax.swing.JFrame {
 
-    /**
-     * Creates new form GUIEmpresa
-     */
     public GUIEmpresa() {
         initComponents();
     }
@@ -112,23 +105,28 @@ public class GUIEmpresa extends javax.swing.JFrame {
 
     private void jButtonVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVentaActionPerformed
         GUIVenta ventaWin = new GUIVenta();
+        this.setLocationRelativeTo(null);
         ventaWin.setVisible(true);
+        this.dispose();
 
     }//GEN-LAST:event_jButtonVentaActionPerformed
 
     private void jButtonClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonClientesActionPerformed
         GUIAdminCliente adminCliWin = new GUIAdminCliente();
         adminCliWin.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jButtonClientesActionPerformed
 
     private void jToggleButtonRegistroVentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButtonRegistroVentasActionPerformed
         GUIRegistroVenta registroWin = new GUIRegistroVenta();
         registroWin.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jToggleButtonRegistroVentasActionPerformed
 
     private void jButtonGestionarFarmacosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGestionarFarmacosActionPerformed
         GUIGestionarFarmaco farmacoWin = new GUIGestionarFarmaco();
         farmacoWin.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jButtonGestionarFarmacosActionPerformed
 
     /**
