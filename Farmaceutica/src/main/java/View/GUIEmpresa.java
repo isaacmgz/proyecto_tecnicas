@@ -8,6 +8,7 @@ public class GUIEmpresa extends javax.swing.JFrame {
 
     public GUIEmpresa() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -105,7 +106,6 @@ public class GUIEmpresa extends javax.swing.JFrame {
 
     private void jButtonVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVentaActionPerformed
         GUIVenta ventaWin = new GUIVenta();
-        this.setLocationRelativeTo(null);
         ventaWin.setVisible(true);
         this.dispose();
 
